@@ -1,0 +1,40 @@
+
+spring:
+  kafka:
+    bootstrap-servers: kafkabkrodc01-dev.test.intranet:9093,kafkabkrodc02-dev.test.intranet:9093,kafkabkrodc03-dev.test.intranet:9093,kafkabkrodc04-dev.test.intranet:9093,kafkabkrodc05-dev.test.intranet:9093
+    producer:
+      acks: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    #properties:
+    properties:
+      batch.size: 16384
+      buffer.memory: 33554432
+      linger.ms: 5
+      max.block.ms: 60000
+      max.in.flight.requests.per.connection: 1
+      max.request.size: 14000000
+      metadata.fetch.timeout.ms: 60000
+      metadata.max.age.ms: 300000
+      metrics.sample.window.ms: 30000
+      receive.buffer.bytes: 32768
+      reconnect.backoff.ms: 50
+      request.timeout.ms: 30000
+      retries: 20
+      retry.backoff.ms: 1000
+      security.protocol: SASL_SSL
+      ssl.truststore.type: JKS
+      ssl.truststore.location: C:\kafka-producer-git\Broncos-Kafka-Producer\src\main\resources\security\kafka.truststore.jks
+      ssl.truststore.password: changeit
+      sasl:
+        mechanism: PLAIN
+        jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="BRONCOST" password="SalesComp12#";
+
+
+server:
+  port: 8080
+
+
+topic:
+  inventory: ${INVENTORY_TOPIC:ODC.DEV1.CDW-LVLT-NETINV-ODS.TEST.TOPIC.PRIVATE}
+  wavelength: ${WAVELENGTH_TOPIC:ODC.DEV1.CDW-LVLT-NETINV-ODS.TEST.TOPIC.PRIVATE}
